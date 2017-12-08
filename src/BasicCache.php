@@ -41,6 +41,40 @@ class BasicCache{
 		if( ! is_dir($this->path)) mkdir($this->path, 0755);
 	}
 
+  // Start
+	public function start(){
+
+		// If the time has not expired
+		if($this->checkExpire($this->expire, $this->cachedFilePath)){
+
+			// Read the cached file
+			readfile($this->cachedFilePath);
+			exit();
+
+		}else{
+
+			// Start buffer
+			ob_start();
+
+		}
+
+	}
+
+	// End
+	public function end(){
+
+		// If the time has expired
+		if( ! $this->checkExpire($this->expire, $this->cachedFilePath)){
+
+			// Write the buffer data to the cache file
+			$open 	 = fopen($this->cachedFilePath, 'w+');
+			fwrite($open, $this->outputMinify(ob_get_flush()));
+			fclose($open);
+
+		}
+
+	}
+
   // Clear cache
 	public function clear(){
 
