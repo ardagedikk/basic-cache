@@ -41,6 +41,13 @@ class BasicCache{
 		if( ! is_dir($this->path)) mkdir($this->path, 0755);
 	}
 
+  // Clear cache
+	public function clear(){
+
+		// Remove cache directory
+		return $this->removeDir($this->path);
+	}
+
   // Check expire
 	private function checkExpire($expire, $file){
 
