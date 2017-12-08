@@ -48,6 +48,22 @@ class BasicCache{
 		if(file_exists($file)) return ((time() - $expire) < filemtime($file));
 	}
 
+  // Output minifier
+	private function outputMinify($output){
+
+		 $search = array(
+			  '/\>[^\S ]+/s',     // Strip whitespaces after tags, except space
+        '/[^\S ]+\</s',     // Strip whitespaces before tags, except space
+        '/(\s)+/s',         // Shorten multiple whitespace sequences
+        '/<!--(.|\s)*?-->/' // Remove HTML comments
+    );
+
+    $replace = array('>', '<', '\\1', '');
+    $output  = preg_replace($search, $replace, $output);
+		return $output;
+
+	}
+
 	// Remove directory
 	private function removeDir($dir) {
 
