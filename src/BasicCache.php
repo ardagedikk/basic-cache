@@ -41,6 +41,26 @@ class BasicCache{
 		if( ! is_dir($this->path)) mkdir($this->path, 0755);
 	}
 
+  // Check expire
+	private function checkExpire($expire, $file){
+
+		// If the expiry time is less than the last modified date of the file
+		if(file_exists($file)) return ((time() - $expire) < filemtime($file));
+	}
+
+	// Remove directory
+	private function removeDir($dir) {
+
+		// Look at each everything in the directory
+		// Delete if directory or file
+		foreach(glob($dir.'/*') as $file) {
+			if(is_dir($file)) rrmdir($file); else unlink($file);
+		}
+
+		// Remove directory
+		rmdir($dir);
+	}
+
 }
 
 ?>
