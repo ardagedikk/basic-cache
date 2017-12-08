@@ -1,0 +1,24 @@
+{
+  "name": "ardagedik/basic-cache",
+  "description": "Simple and fast caching class that uses the file system for caching",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Arda Gedik",
+      "email": "ardagedikk@hotmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+	"autoload": {
+    "psr-4": {
+      "ArdaGedik\\": "src"
+    }
+  },
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5"
+  }
+}
